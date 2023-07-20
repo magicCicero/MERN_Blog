@@ -4,21 +4,22 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DeleteBtn from "../../components/DeleteBtn/DeleteBtn";
+import UpdatePost from "../../components/UpdatePost/UpdatePost";
 const PostDetails = () => {
   const params = useParams();
   const idPost = params.id;
   const [post, setPost] = useState([]);
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`/api/post/${idPost}`)
-      .then((res) => {
-        setPost(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    const fetchData = async () => {
+      const { data } = await axios.get(`/api/post/${idPost}`);
+      setPost(data);
+      console.log(data);
+    };
+    fetchData();
+  }, [refresh]);
+
   return (
     <>
       <Nav />
@@ -28,6 +29,12 @@ const PostDetails = () => {
       <p>{post.content}</p>
       <p>{post.author}</p>
       <DeleteBtn postId={idPost} />
+      <UpdatePost
+        postId={idPost}
+        setRefresh={setRefresh}
+        postData={post}
+        refresh={refresh}
+      />
     </>
   );
 };

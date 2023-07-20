@@ -31,7 +31,6 @@ const Home = () => {
   return (
     <>
       <Nav />
-
       <CreatePostImageForm setRefresh={setRefresh} />
       <PostList />
     </>
