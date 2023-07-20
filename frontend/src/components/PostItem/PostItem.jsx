@@ -16,6 +16,7 @@ const PostItem = () => {
     <>
       {allPosts?.map((post) => (
         <article key={post._id} className="post-item">
+          <img src={post.image?.url} alt="" />
           <h2>{post.title}</h2>
           <p>Verfasst von {getAuthorName(post.author)}</p>
           <DetailBtn postId={post._id} />

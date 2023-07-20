@@ -17,6 +17,13 @@ const postsSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     immutable: true,
   },
+  image: {
+    type: {
+      url: String,
+      imageId: String,
+    },
+    required: true,
+  },
 });
 
 export const Post = mongoose.model("Post", postsSchema);

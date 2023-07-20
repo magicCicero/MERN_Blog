@@ -22,6 +22,7 @@ const PostDetails = () => {
     <>
       <Nav />
       <h1>Details</h1>
+      <img src={post.image?.url} alt="" />
       <h1>{post.title}</h1>
       <p>{post.content}</p>
       <p>{post.author}</p>
