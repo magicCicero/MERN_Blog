@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Nav from "../../components/Nav/Nav";
 import { PostsContext, AuthorsContext } from "../../context/Context";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import CreatePostImageForm from "../../components/CreatePostImageForm/CreatePostImageForm";
 import PostList from "../../components/PostList/PostList";
 const Home = () => {
@@ -11,11 +11,15 @@ const Home = () => {
   const { allAuthors, setAllAuthors } = useContext(AuthorsContext);
 
   // Erster PostFetch aus der DB
+  const [refresh, setRefresh] = useState(true);
+
   useEffect(() => {
-    axios.get("/api/posts").then((res) => {
-      setAllPosts(res.data);
-    });
-  }, []);
+    const fetchData = async () => {
+      const { data } = await axios.get("/api/posts");
+      setAllPosts(data);
+    };
+    fetchData();
+  }, [refresh]);
   // Erster AuthorFetch aus der DB
   useEffect(() => {
     axios.get("/api/authors").then((res) => {
@@ -28,7 +32,7 @@ const Home = () => {
     <>
       <Nav />
 
-      <CreatePostImageForm />
+      <CreatePostImageForm setRefresh={setRefresh} />
       <PostList />
     </>
   );

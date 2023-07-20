@@ -10,7 +10,7 @@ const DeleteBtn = (props) => {
   const deletePost = async () => {
     await axios.delete(`/api/deletePost/${props.postId}`);
     // Alle Posts aus AllContacts werden gefiltert und nach der jeweiligen ID gesucht. Anschließend wird der Kontakt gelöscht
-    setAllContacts(allPosts.filter((post) => post._id !== props.postId));
+    setAllPosts(allPosts.filter((post) => post._id !== props.postId));
   };
   return (
     <>
