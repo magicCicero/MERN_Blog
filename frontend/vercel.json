@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://mernblog.alpayc.repl.co/api/$1"
+    }
+  ]
+}
