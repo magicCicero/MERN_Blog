@@ -78,22 +78,39 @@ app.post("/api/addPost", upload.single("image"), async (req, res) => {
     if (author === null) {
       return res.send("Author is invalid");
     }
+
+    // Überprüfen, ob das Bild erfolgreich hochgeladen wurde
+    if (!req.file) {
+      return res.status(400).send("No image file found.");
+    }
+
+    // Cloudinary-Upload-Stream-Ereignis mit Fehlerbehandlung
     cloudinary.uploader
       .upload_stream(
         { resource_type: "image", folder: "MyBlog" },
         async (err, result) => {
-          console.log(result);
-          const response = await Post.create({
-            ...req.body,
-            image: { url: result.secure_url, imageId: result.public_id },
-          });
-          res.json(response);
+          if (err) {
+            console.log("Cloudinary upload error:", err);
+            return res.status(500).send("Error uploading image to Cloudinary.");
+          }
+
+          console.log("Cloudinary upload result:", result);
+          try {
+            const response = await Post.create({
+              ...req.body,
+              image: { url: result.secure_url, imageId: result.public_id },
+            });
+            res.json(response);
+          } catch (err) {
+            console.log("Error creating post:", err);
+            res.status(500).send("Error creating post.");
+          }
         }
       )
       .end(req.file.buffer);
   } catch (err) {
-    console.log(err);
-    res.status(500).send("there was an error");
+    console.log("Error:", err);
+    res.status(500).send("There was an error.");
   }
 });
 
