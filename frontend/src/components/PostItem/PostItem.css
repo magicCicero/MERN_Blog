@@ -7,3 +7,9 @@
   align-items: flex-start;
   border-radius: 1rem;
 }
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  gap: 2rem;
+}

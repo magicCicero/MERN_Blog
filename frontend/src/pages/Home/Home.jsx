@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <>
       <Nav />
-      <h1>Startseite</h1>
+
       <CreatePostImageForm />
       <PostList />
     </>

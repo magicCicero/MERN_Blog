@@ -11,6 +11,7 @@ const CreatePostImageForm = ({ setRefresh }) => {
   };
   return (
     <>
+      <h2>Neuen Blogbeitrag erstellen</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Title" name="title" />
         <input type="text" placeholder="Content" name="content" />

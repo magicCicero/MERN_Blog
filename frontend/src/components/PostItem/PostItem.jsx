@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { PostsContext, AuthorsContext } from "../../context/Context";
 import "./PostItem.css";
 import DetailBtn from "../DetailBtn/DetailBtn";
+import DeleteBtn from "../DeleteBtn/DeleteBtn";
 
 const PostItem = () => {
   const { allPosts, setAllPosts } = useContext(PostsContext);
@@ -19,7 +20,10 @@ const PostItem = () => {
           <img src={post.image?.url} alt="" />
           <h2>{post.title}</h2>
           <p>Verfasst von {getAuthorName(post.author)}</p>
-          <DetailBtn postId={post._id} />
+          <div className="btn-container">
+            <DetailBtn postId={post._id} />
+            <DeleteBtn postId={post._id} />
+          </div>
         </article>
       ))}
     </>
