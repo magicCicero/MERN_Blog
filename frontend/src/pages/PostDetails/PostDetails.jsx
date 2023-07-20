@@ -15,7 +15,6 @@ const PostDetails = () => {
     const fetchData = async () => {
       const { data } = await axios.get(`/api/post/${idPost}`);
       setPost(data);
-      console.log(data);
     };
     fetchData();
   }, [refresh]);
@@ -28,6 +27,7 @@ const PostDetails = () => {
       <h1>{post.title}</h1>
       <p>{post.content}</p>
       <p>{post.author}</p>
+
       <DeleteBtn postId={idPost} />
       <UpdatePost
         postId={idPost}

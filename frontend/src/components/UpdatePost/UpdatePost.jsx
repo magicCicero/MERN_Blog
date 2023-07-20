@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
+import "./UpdatePost.css";
 
 const UpdatePost = ({ postData, setRefresh, postId, refresh }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -30,18 +31,20 @@ const UpdatePost = ({ postData, setRefresh, postId, refresh }) => {
     // Ist der Bearbeitungsmodus aktiviert ändert sich das Aussehen der Komponente
     return (
       <>
-        <input
-          type="text"
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Bitte gebe den neuen Titel ein"
-        />
-        <input
-          type="text"
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Bitte gebe den neuen Content ein"
-        />
+        <div className="update-post-form-container">
+          <input
+            type="text"
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Bitte gebe den neuen Titel ein"
+          />
+          <textarea
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Bitte gebe den neuen Content ein"
+          />
 
-        <button onClick={startUpdating}>Änderungen speichern</button>
+          <button onClick={startUpdating}>Änderungen speichern</button>
+          <button onClick={() => setIsEditing(false)}>Abbrechen</button>
+        </div>
       </>
     );
   } else {

@@ -3,7 +3,7 @@ import "./PostList.css";
 const PostList = () => {
   return (
     <>
-      <h1>Letzte Beiträge</h1>
+      <h1>Neue Beiträge</h1>
       <section className="post-list-container">
         <PostItem />
       </section>

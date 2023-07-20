@@ -1,0 +1,23 @@
+.update-post-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem;
+}
+.update-post-form-container input,
+textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.update-post-form-containerinput:first-of-type {
+  width: 50%;
+}
+.update-post-form-container input:nth-child(2) {
+  width: 80%;
+  height: 20rem;
+}

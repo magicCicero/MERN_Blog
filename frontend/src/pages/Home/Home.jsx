@@ -26,8 +26,7 @@ const Home = () => {
       setAllAuthors(res.data);
     });
   }, []);
-  console.log(allAuthors);
-  console.log(allPosts);
+
   return (
     <>
       <Nav />
