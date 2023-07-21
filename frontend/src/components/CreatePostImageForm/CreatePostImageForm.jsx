@@ -4,6 +4,7 @@ const CreatePostImageForm = ({ setRefresh }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+
     const response = await axios.post("/api/addPost", formData);
     setRefresh((prev) => !prev);
     console.log(response);
