@@ -13,5 +13,9 @@ export default defineConfig(({ command, mode }) => {
         "/api": { target: env.VITE_BACKEND_URL, changeOrigin: true },
       },
     },
+
+    build: {
+      outDir: "./public",
+    },
   };
 });
