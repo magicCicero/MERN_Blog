@@ -17,7 +17,11 @@ cloudinary.config({
 const app = express();
 const PORT = 3001;
 const upload = multer({ storage: multer.memoryStorage() });
-app.use(cors());
+app.use(
+  cors({
+    origins: ["https://mern-blog-frontend-1fe9.onrender.com"],
+  })
+);
 app.use(express.json());
 
 app.use(morgan("dev"));
