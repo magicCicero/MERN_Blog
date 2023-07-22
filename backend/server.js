@@ -13,11 +13,11 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-app.use(cors());
+
 const app = express();
 const PORT = 3001;
 const upload = multer({ storage: multer.memoryStorage() });
-
+app.use(cors());
 app.use(express.json());
 
 app.use(morgan("dev"));
