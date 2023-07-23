@@ -5,6 +5,8 @@ import Home from "./pages/Home/Home";
 import Posts from "./pages/Posts/Posts";
 import Authors from "./pages/Authors/Authors";
 import PostDetails from "./pages/PostDetails/PostDetails";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
 import "./App.css";
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/authors" element={<Authors />} />
               <Route path="/posts" element={<Posts />} />
               <Route path="/post/:id" element={<PostDetails />} />
