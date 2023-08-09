@@ -1,6 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,6 +24,12 @@ const Login = () => {
     // make the API call
     axios(configuration)
       .then((result) => {
+        // set the cookie
+        Cookies.set("TOKEN", result.data.token, {
+          path: "/",
+        });
+        // redirect user to the auth page
+        window.location.href = "/auth";
         setLogin(true);
       })
       .catch((error) => {
