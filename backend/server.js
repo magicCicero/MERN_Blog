@@ -46,43 +46,41 @@ app.get("/api/auth-endpoint", authentication, (request, response) => {
 });
 
 // register endpoint
-app.post("/api/register", (request, response) => {
-  console.log(request);
-  // hash the password
-  bcrypt
-    .hash(request.body.password, 10)
-    .then((hashedPassword) => {
-      // create a new user instance and collect the data
-      const user = new User({
-        email: request.body.email,
-        password: hashedPassword,
-      });
+app.post("/api/register", async (request, response) => {
+  try {
+    // hash the password
+    const hashedPassword = await bcrypt.hash(request.body.password, 10);
 
-      // save the new user
-      user
-        .save()
-        // return success if the new user is added to the database successfully
-        .then((result) => {
-          response.status(201).send({
-            message: "User Created Successfully",
-            result,
-          });
-        })
-        // catch error if the new user wasn't added successfully to the database
-        .catch((error) => {
-          response.status(500).send({
-            message: "Error creating user",
-            error,
-          });
-        });
-    })
-    // catch error if the password hash isn't successful
-    .catch((e) => {
-      response.status(500).send({
-        message: "Password was not hashed successfully",
-        e,
-      });
+    // Create a new author instance
+    const author = new Author({
+      name: request.body.username,
+      email: request.body.email,
     });
+
+    // Save the author to the database
+    const savedAuthor = await author.save();
+
+    // Create a new user instance with the author's ID
+    const user = new User({
+      email: request.body.email,
+      password: hashedPassword,
+      author: savedAuthor._id, // Associate the user with the author using the author's ID
+    });
+
+    // Save the new user to the database
+    const savedUser = await user.save();
+
+    response.status(201).send({
+      message: "User and Author Created Successfully",
+      user: savedUser,
+      author: savedAuthor,
+    });
+  } catch (error) {
+    response.status(500).send({
+      message: "Error registering user",
+      error,
+    });
+  }
 });
 
 // login endpoint

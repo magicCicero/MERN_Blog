@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please provide a password!"],
     unique: false,
   },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    // immutable: true,
+    ref: "Author",
+  },
 });
 
 export const User = mongoose.model("User", userSchema);
